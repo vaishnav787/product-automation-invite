@@ -21,7 +21,8 @@ async function runAutomation() {
   // If the title indicates that it's the sign-in page, perform login actions
   if (pageTitle === 'Google Ads – Sign in') {
     console.log('Performing login actions...');
-
+    
+    await page.waitForTimeout(1000);
     await page.waitForSelector('xpath=//*[text()="Use another account"]')
     await page.click('xpath=//*[text()="Use another account"]')
 
