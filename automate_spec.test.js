@@ -19,22 +19,13 @@ async function runAutomation() {
     await page.waitForTimeout(1000);
     try {
       // Check if "Use another account" button is present
-      await page.screenshot({
-        path: "D:Playwright/images/before_use_another_account_click.png",
-      });
       const useAnotherAccountExists = await page.isVisible(
         'xpath=//*[text()="Use another account"]',
         { timeout: 2000 }
       );
 
       if (useAnotherAccountExists) {
-        await page.screenshot({
-          path: "D:Playwright/images/before_use_another_account_click.png",
-        });
         await page.click('xpath=//*[text()="Use another account"]');
-        await page.screenshot({
-          path: "D:Playwright/images/after_use_another_account_click.png",
-        });
       }
 
       // Fill email and password
@@ -43,24 +34,13 @@ async function runAutomation() {
         "abhijeet.jagadale@promodome.in"
       );
       await page.waitForTimeout(1000);
-      await page.screenshot({
-        path: "D:Playwright/images/after_email_id.png",
-      });
       await page.click('xpath=//*[text()="Next"]');
       await page.waitForTimeout(1000);
       await page.fill('xpath=//*[@type="password"]', "Abhijeet@2023");
       await page.waitForTimeout(1000);
-      await page.screenshot({
-        path: "D:Playwright/images/after_password.png",
-      });
-      await page.screenshot({
-        path: "/var/www/screenshots/before_password_next_click.png",
-      });
       await page.click('xpath=//*[text()="Next"]');
       await page.waitForTimeout(1000);
-      await page.screenshot({
-        path: "/var/www/screenshots/after_password_next_click.png",
-      });
+      
     } catch (error) {
       console.log("Error during login:", error.message);
     }
@@ -72,15 +52,8 @@ async function runAutomation() {
     await page.waitForSelector('xpath=//tab-button[@aria-label="Received"]', {
       timeout: 30000,
     });
-    await page.screenshot({
-      path: "/var/www/screenshots/before_received_click.png",
-    });
     await page.click('xpath=//tab-button[@aria-label="Received"]');
     await page.waitForTimeout(2000);
-    await page.screenshot({
-      path: "/var/www/screenshots/after_received_click.png",
-    });
-
     let viewRequestSelector = 'xpath=(//*[text()="View request"])[1]';
     let approveSelector = 'xpath=(//*[text()="Approve"])[1]';
 
@@ -88,17 +61,11 @@ async function runAutomation() {
       try {
         console.log('Waiting for "View request" button...');
         await page.waitForSelector(viewRequestSelector, { timeout: 2000 });
-        await page.screenshot({
-          path: "/var/www/screenshots/before_view_request_click.png",
-        });
         await page.click(viewRequestSelector);
 
         console.log('Waiting for "Approve" button...');
         await page.waitForTimeout(5000);
         await page.waitForSelector(approveSelector, { timeout: 2000 });
-        await page.screenshot({
-          path: "/var/www/screenshots/before_approve_click.png",
-        });
         await page.click(approveSelector);
 
         await page.waitForTimeout(2000);
