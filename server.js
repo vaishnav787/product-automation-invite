@@ -7,11 +7,17 @@ const port = 3000;
 
 app.get("/run-automation", async (req, res) => {
   try {
-    await runAutomation();
-    res.status(200).send("Automation executed successfully!");
+    const channelIds = await runAutomation(); // Get the channel IDs
+    res.status(200).json({
+      message: "Automation Executed Successfully!",
+      channelIds: channelIds // Send the channel IDs in the response
+    });
   } catch (error) {
     console.error("Error running automation:", error.message);
-    res.status(500).send(`Automation failed: ${error.message}`);
+    res.status(500).json({
+      message: `Automation failed: ${error.message}`,
+      channelIds: [] // Send an empty array in case of error
+    });
   }
 });
 
